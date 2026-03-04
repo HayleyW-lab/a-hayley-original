@@ -18,10 +18,11 @@
       "settings": {
         "profile_image": "shopify://shop_images/2022-10-09_7.jpg"
       }
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {}
     }
   },
-  "order": [
-    "hero",
-    "about"
-  ]
+  "order": ["hero", "about", "featured-products"]
 }
