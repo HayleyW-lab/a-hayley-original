@@ -1,5 +1,16 @@
 <section class="about">
   <div class="about__content">
+
+    {% if section.settings.profile_image %}
+      <div class="about__photo-wrapper">
+        <img
+          src="{{ section.settings.profile_image | img_url: '400x400', crop: 'center' }}"
+          alt="Hayley"
+          class="about__profile-pic"
+        >
+      </div>
+    {% endif %}
+
     <h2 class="about__title">The Story Behind The Sayings</h2>
     <p class="about__text">Every saying on every shirt comes from a real moment, a real journey. A Hayley Original was born from 10 years of truth, loss, love and everything in between.</p>
     <p class="about__text">No grey areas. Just real words from a real life.</p>
@@ -31,4 +42,32 @@
     margin: 0 auto 20px;
     font-style: italic;
   }
+
+  .about__photo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .about__profile-pic {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffffff;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+  }
 </style>
+
+{% schema %}
+{
+  "name": "About",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "profile_image",
+      "label": "Profile Photo"
+    }
+  ]
+}
+{% endschema %}
