@@ -1,7 +1,19 @@
 <header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+ <div class="header__logo">
+  {% if section.settings.logo %}
+    <a href="{{ routes.root_url }}">
+      <img
+        src="{{ section.settings.logo | img_url: '300x' }}"
+        alt="{{ shop.name }}"
+        class="header__logo-img"
+      >
+    </a>
+  {% else %}
+    <a href="{{ routes.root_url }}" class="header__logo-text">
+      {{ shop.name }}
+    </a>
+  {% endif %}
+</div>
 
   <div class="header__menu">
     {% for link in section.settings.menu.links %}
@@ -61,6 +73,11 @@
 {
   "name": "t:general.header",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
     {
       "type": "link_list",
       "id": "menu",

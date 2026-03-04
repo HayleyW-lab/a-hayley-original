@@ -97,7 +97,8 @@ body {
     calc(100% - var(--page-margin) * 2)
   );
   --content-margin: minmax(var(--page-margin), 1fr);
-  --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
+  --content-grid: var(--content-margin) var(--content-width)
+    var(--content-margin);
 
   /* This is required to make <img> elements work as background images */
   position: relative;
@@ -114,4 +115,19 @@ body {
 /* Child elements that use the full-width utility class span the entire viewport. */
 .shopify-section > .full-width {
   grid-column: 1 / -1;
+}
+
+/* Header Logo */
+.header__logo-img {
+  max-width: 180px;
+  height: auto;
+  display: block;
+}
+
+.header__logo-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #000;
+  text-decoration: none;
+  letter-spacing: 0.05em;
 }
