@@ -40,7 +40,7 @@
       "type": "featured-products",
       "settings": {
         "title": "Shop The Collection",
-        "collection": "",
+        "collection": "the-collection",
         "product_limit": 3
       }
     },
