@@ -1,10 +1,10 @@
 <section class="about">
-  <div class="about__content">
+  <div class="about__inner">
 
     {% if section.settings.profile_image %}
       <div class="about__photo-wrapper">
         <img
-          src="{{ section.settings.profile_image | img_url: '400x400', crop: 'center' }}"
+          src="{{ section.settings.profile_image | img_url: '600x600', crop: 'center' }}"
           alt="{{ section.settings.photo_alt | default: 'Hayley' }}"
           class="about__profile-pic"
           loading="lazy"
@@ -12,15 +12,17 @@
       </div>
     {% endif %}
 
-    <h2 class="about__title">{{ section.settings.title | default: 'The Story Behind The Sayings' }}</h2>
+    <div class="about__content">
+      <h2 class="about__title">{{ section.settings.title | default: 'The Story Behind The Sayings' }}</h2>
 
-    {% if section.settings.text_1 != blank %}
-      <p class="about__text">{{ section.settings.text_1 }}</p>
-    {% endif %}
+      {% if section.settings.text_1 != blank %}
+        <p class="about__text">{{ section.settings.text_1 }}</p>
+      {% endif %}
 
-    {% if section.settings.text_2 != blank %}
-      <p class="about__text about__text--emphasis">{{ section.settings.text_2 }}</p>
-    {% endif %}
+      {% if section.settings.text_2 != blank %}
+        <p class="about__text about__text--emphasis">{{ section.settings.text_2 }}</p>
+      {% endif %}
+    </div>
 
   </div>
 </section>
@@ -29,50 +31,54 @@
   .about {
     background-color: #000000;
     color: #ffffff;
-    text-align: center;
     padding: 100px 40px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .about__content {
-    max-width: 760px;
+  .about__inner {
+    max-width: 1200px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: center;
   }
 
   .about__photo-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2.5rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
   }
 
   .about__profile-pic {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.06);
     display: block;
+    filter: grayscale(100%);
+  }
+
+  .about__content {
+    text-align: left;
   }
 
   .about__title {
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-size: clamp(1.8rem, 4vw, 3rem);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 32px;
-    line-height: 1.1;
+    margin-bottom: 28px;
+    line-height: 1.05;
   }
 
   .about__text {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: 1.85;
-    color: rgba(255, 255, 255, 0.75);
-    max-width: 620px;
-    margin: 0 auto 20px;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 18px;
   }
 
   .about__text--emphasis {
@@ -81,14 +87,22 @@
     letter-spacing: 0.03em;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .about {
       padding: 72px 24px;
     }
 
-    .about__profile-pic {
-      width: 160px;
-      height: 160px;
+    .about__inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .about__photo-wrapper {
+      max-width: 320px;
+    }
+
+    .about__content {
+      text-align: center;
     }
   }
 {% endstylesheet %}
