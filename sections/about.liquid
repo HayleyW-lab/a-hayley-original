@@ -5,48 +5,45 @@
       <div class="about__photo-wrapper">
         <img
           src="{{ section.settings.profile_image | img_url: '400x400', crop: 'center' }}"
-          alt="Hayley"
+          alt="{{ section.settings.photo_alt | default: 'Hayley' }}"
           class="about__profile-pic"
+          loading="lazy"
         >
       </div>
     {% endif %}
 
-    <h2 class="about__title">The Story Behind The Sayings</h2>
-    <p class="about__text">Every saying on every shirt comes from a real moment, a real journey. A Hayley Original was born from 10 years of truth, loss, love and everything in between.</p>
-    <p class="about__text">No grey areas. Just real words from a real life.</p>
+    <h2 class="about__title">{{ section.settings.title | default: 'The Story Behind The Sayings' }}</h2>
+
+    {% if section.settings.text_1 != blank %}
+      <p class="about__text">{{ section.settings.text_1 }}</p>
+    {% endif %}
+
+    {% if section.settings.text_2 != blank %}
+      <p class="about__text about__text--emphasis">{{ section.settings.text_2 }}</p>
+    {% endif %}
+
   </div>
 </section>
 
-<style>
+{% stylesheet %}
   .about {
     background-color: #000000;
     color: #ffffff;
     text-align: center;
-    padding: 80px 40px;
-    border-top: 3px solid #ffffff;
-    border-bottom: 3px solid #ffffff;
+    padding: 100px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  .about__title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 30px;
-  }
-
-  .about__text {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    max-width: 700px;
-    margin: 0 auto 20px;
-    font-style: normal;
+  .about__content {
+    max-width: 760px;
+    margin: 0 auto;
   }
 
   .about__photo-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
 
   .about__profile-pic {
@@ -54,10 +51,47 @@
     height: 220px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #ffffff;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.06);
+    display: block;
   }
-</style>
+
+  .about__title {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 32px;
+    line-height: 1.1;
+  }
+
+  .about__text {
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 620px;
+    margin: 0 auto 20px;
+  }
+
+  .about__text--emphasis {
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 600px) {
+    .about {
+      padding: 72px 24px;
+    }
+
+    .about__profile-pic {
+      width: 160px;
+      height: 160px;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -66,7 +100,36 @@
     {
       "type": "image_picker",
       "id": "profile_image",
-      "label": "Profile Photo"
+      "label": "Profile photo"
+    },
+    {
+      "type": "text",
+      "id": "photo_alt",
+      "label": "Photo alt text",
+      "default": "Hayley"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The Story Behind The Sayings"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1",
+      "label": "First paragraph",
+      "default": "Every saying on every shirt comes from a real moment, a real journey. A Hayley Original was born from 10 years of truth, loss, love and everything in between."
+    },
+    {
+      "type": "textarea",
+      "id": "text_2",
+      "label": "Second paragraph (bold)",
+      "default": "No grey areas. Just real words from a real life."
+    }
+  ],
+  "presets": [
+    {
+      "name": "About"
     }
   ]
 }
