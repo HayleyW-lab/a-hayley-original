@@ -1,171 +1,187 @@
+<div class="info-tabs">
+  <div class="info-tabs__inner">
+
+    <div class="info-tabs__nav">
+      <button class="info-tabs__btn info-tabs__btn--active" data-tab="shipping">Shipping &amp; Returns</button>
+      <button class="info-tabs__btn" data-tab="sizing">Size Guide</button>
+      <button class="info-tabs__btn" data-tab="faq">FAQ</button>
+      <button class="info-tabs__btn" data-tab="reviews">Reviews</button>
+    </div>
+
+    <div class="info-tabs__panel info-tabs__panel--active" id="tab-shipping">
+      <div class="info-tabs__shipping-grid">
+        <div class="info-tabs__shipping-item">
+          <h4>{{ section.settings.shipping_title_1 | default: 'Standard Shipping' }}</h4>
+          <p>{{ section.settings.shipping_text_1 | default: '5-10 business days. Orders printed and dispatched within 3-5 days.' }}</p>
+        </div>
+        <div class="info-tabs__shipping-item">
+          <h4>{{ section.settings.shipping_title_2 | default: 'Express Shipping' }}</h4>
+          <p>{{ section.settings.shipping_text_2 | default: '2-4 business days. Available at checkout.' }}</p>
+        </div>
+        <div class="info-tabs__shipping-item">
+          <h4>{{ section.settings.shipping_title_3 | default: 'Worldwide' }}</h4>
+          <p>{{ section.settings.shipping_text_3 | default: 'We ship everywhere. Customs and duties may apply.' }}</p>
+        </div>
+        <div class="info-tabs__shipping-item">
+          <h4>{{ section.settings.returns_title | default: 'Returns and Reprints' }}</h4>
+          <p>{{ section.settings.returns_text | default: 'Print defects or wrong size? Contact us within 14 days and we will reprint or refund.' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-tabs__panel" id="tab-sizing">
+      <p class="info-tabs__sizing-intro">{{ section.settings.sizing_intro | default: 'All measurements in centimetres. When in doubt, size up.' }}</p>
+      <div class="info-tabs__table-wrap">
+        <table class="info-tabs__table">
+          <thead><tr><th>Size</th><th>Chest</th><th>Length</th><th>Sleeve</th></tr></thead>
+          <tbody>
+            <tr><td>S</td><td>91-96</td><td>71</td><td>20</td></tr>
+            <tr><td>M</td><td>99-104</td><td>74</td><td>21</td></tr>
+            <tr><td>L</td><td>107-112</td><td>76</td><td>22</td></tr>
+            <tr><td>XL</td><td>117-122</td><td>79</td><td>23</td></tr>
+            <tr><td>2XL</td><td>127-132</td><td>81</td><td>24</td></tr>
+            <tr><td>3XL</td><td>137-142</td><td>84</td><td>25</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="info-tabs__sizing-note">{{ section.settings.sizing_note | default: 'Still unsure? Email us and we will help you find your size.' }}</p>
+    </div>
+
+    <div class="info-tabs__panel" id="tab-faq">
+      <div class="info-tabs__faq">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq_item' -%}
+            <div class="info-tabs__faq-item" {{ block.shopify_attributes }}>
+              <button class="info-tabs__faq-q">{{ block.settings.question }}<span class="info-tabs__faq-icon">+</span></button>
+              <div class="info-tabs__faq-a"><p>{{ block.settings.answer }}</p></div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="info-tabs__panel" id="tab-reviews">
+      <div class="info-tabs__reviews">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            <div class="info-tabs__review" {{ block.shopify_attributes }}>
+              <div class="info-tabs__stars">{%- for i in (1..block.settings.rating) -%}★{%- endfor -%}</div>
+              <p class="info-tabs__review-text">"{{ block.settings.review_text }}"</p>
+              <p class="info-tabs__review-author">-- {{ block.settings.author }}{% if block.settings.product_name != blank %}, <em>{{ block.settings.product_name }}</em>{% endif %}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var btns = document.querySelectorAll('.info-tabs__btn');
+  var panels = document.querySelectorAll('.info-tabs__panel');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) { b.classList.remove('info-tabs__btn--active'); });
+      panels.forEach(function(p) { p.classList.remove('info-tabs__panel--active'); });
+      btn.classList.add('info-tabs__btn--active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('info-tabs__panel--active');
+    });
+  });
+  document.querySelectorAll('.info-tabs__faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.parentElement;
+      var isOpen = item.classList.contains('info-tabs__faq-item--open');
+      document.querySelectorAll('.info-tabs__faq-item').forEach(function(i) {
+        i.classList.remove('info-tabs__faq-item--open');
+        i.querySelector('.info-tabs__faq-icon').textContent = '+';
+      });
+      if (!isOpen) {
+        item.classList.add('info-tabs__faq-item--open');
+        btn.querySelector('.info-tabs__faq-icon').textContent = '-';
+      }
+    });
+  });
+});
+</script>
+
+{% stylesheet %}
+.info-tabs { background:#000; color:#fff; padding:80px 40px; border-top:1px solid rgba(255,255,255,0.08); }
+.info-tabs__inner { max-width:1200px; margin:0 auto; }
+.info-tabs__nav { display:flex; border-bottom:1px solid rgba(255,255,255,0.12); margin-bottom:48px; overflow-x:auto; }
+.info-tabs__btn { background:none; border:none; color:rgba(255,255,255,0.35); font-family:inherit; font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; padding:16px 28px; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color 0.2s,border-color 0.2s; white-space:nowrap; }
+.info-tabs__btn:hover { color:rgba(255,255,255,0.7); }
+.info-tabs__btn--active { color:#fff; border-bottom-color:#fff; }
+.info-tabs__panel { display:none; }
+.info-tabs__panel--active { display:block; }
+.info-tabs__shipping-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+.info-tabs__shipping-item { background:rgba(255,255,255,0.03); padding:32px; border:1px solid rgba(255,255,255,0.06); }
+.info-tabs__shipping-item h4 { font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:12px; }
+.info-tabs__shipping-item p { font-size:0.9rem; color:rgba(255,255,255,0.7); line-height:1.7; }
+.info-tabs__sizing-intro { font-size:0.9rem; color:rgba(255,255,255,0.5); margin-bottom:32px; line-height:1.7; }
+.info-tabs__table-wrap { overflow-x:auto; }
+.info-tabs__table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+.info-tabs__table th { font-size:0.6rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35); padding:12px 20px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }
+.info-tabs__table td { padding:14px 20px; color:rgba(255,255,255,0.75); border-bottom:1px solid rgba(255,255,255,0.05); }
+.info-tabs__sizing-note { font-size:0.8rem; color:rgba(255,255,255,0.3); margin-top:24px; }
+.info-tabs__faq-item { border-bottom:1px solid rgba(255,255,255,0.08); }
+.info-tabs__faq-q { width:100%; background:none; border:none; color:rgba(255,255,255,0.8); font-family:inherit; font-size:0.9rem; font-weight:600; text-align:left; padding:22px 0; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:20px; transition:color 0.2s; }
+.info-tabs__faq-q:hover { color:#fff; }
+.info-tabs__faq-icon { font-size:1.2rem; color:rgba(255,255,255,0.3); flex-shrink:0; }
+.info-tabs__faq-a { display:none; padding-bottom:20px; }
+.info-tabs__faq-item--open .info-tabs__faq-a { display:block; }
+.info-tabs__faq-a p { font-size:0.875rem; color:rgba(255,255,255,0.5); line-height:1.8; }
+.info-tabs__reviews { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:2px; }
+.info-tabs__review { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); padding:32px; }
+.info-tabs__stars { color:#fff; font-size:0.8rem; letter-spacing:0.1em; margin-bottom:16px; }
+.info-tabs__review-text { font-size:0.9rem; color:rgba(255,255,255,0.7); line-height:1.7; margin-bottom:16px; }
+.info-tabs__review-author { font-size:0.7rem; color:rgba(255,255,255,0.3); letter-spacing:0.08em; }
+.info-tabs__review-author em { font-style:normal; color:rgba(255,255,255,0.45); }
+@media (max-width:768px) {
+  .info-tabs { padding:60px 20px; }
+  .info-tabs__shipping-grid { grid-template-columns:1fr; }
+  .info-tabs__btn { padding:14px 18px; }
+}
+{% endstylesheet %}
+
+{% schema %}
 {
-  "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
-        "speed": "22s"
-      }
-    },
-    "hero": {
-      "type": "hero",
-      "settings": {
-        "title": "A Hayley Original",
-        "tagline": "Every saying has a story",
-        "button_text": "Shop Now",
-        "button_url": "/collections/all"
-      }
-    },
-    "about": {
-      "type": "about",
-      "settings": {
-        "profile_image": "shopify://shop_images/2022-10-09_7.jpg",
-        "title": "The Story Behind The Sayings",
-        "text_1": "Every saying on every shirt comes from a real moment, a real journey. A Hayley Original was born from 10 years of truth, loss, love and everything in between.",
-        "text_2": "No grey areas. Just real words from a real life."
-      }
-    },
-    "featured-products": {
-      "type": "featured-products",
-      "settings": {
-        "title": "Shop The Collection",
-        "product_limit": 3
-      }
-    },
-    "info-tabs": {
-      "type": "info-tabs",
-      "settings": {
-        "shipping_title_1": "Standard Shipping",
-        "shipping_text_1": "5–10 business days. Orders are printed and dispatched within 3–5 days via Printful. Free shipping on orders over $80 AUD.",
-        "shipping_title_2": "Express Shipping",
-        "shipping_text_2": "2–4 business days. Available at checkout. Because sometimes you need it now.",
-        "shipping_title_3": "Worldwide",
-        "shipping_text_3": "We ship everywhere. Fulfilled from the Printful facility closest to you. Customs and duties may apply.",
-        "returns_title": "Returns & Reprints",
-        "returns_text": "Print defects, wrong size, or damaged item? Contact us within 14 days and we'll reprint or refund. No change-of-mind returns — every item is made to order.",
-        "sizing_intro": "All measurements in centimetres. When in doubt, size up — the relaxed fit is intentional. Garments are Bella+Canvas 3001, 180gsm unisex tee.",
-        "sizing_note": "Still unsure? Email us at designer@ahayleyoriginal.com and we'll help you find your size."
-      },
-      "blocks": {
-        "faq-1": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How long does shipping take?",
-            "answer": "Standard 5–10 business days from production. Express 2–4 days available at checkout."
-          }
-        },
-        "faq-2": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Are items printed on demand?",
-            "answer": "Yes — every item is made when you order it via Printful. No dead stock, no waste, printed fresh for you."
-          }
-        },
-        "faq-3": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Can I return or exchange?",
-            "answer": "Print defects, wrong items or damage — contact us within 14 days and we'll reprint or refund. No change-of-mind returns as items are made to order."
-          }
-        },
-        "faq-4": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What fabric are the shirts?",
-            "answer": "Bella+Canvas 3001 unisex jersey. 100% Airlume combed and ring-spun cotton, 180gsm. Pre-shrunk, retail fit."
-          }
-        },
-        "faq-5": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How do I wash my shirt?",
-            "answer": "Cold wash inside out. Tumble dry low or air dry. Don't iron directly over the print."
-          }
-        },
-        "faq-6": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Do you do custom orders?",
-            "answer": "Sometimes! Reach out via email with your idea. Bulk orders of 10+ for events or groups are welcome."
-          }
-        },
-        "faq-7": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What if my size is sold out?",
-            "answer": "Use the Notify Me button and we'll alert you when it's back in stock."
-          }
-        },
-        "faq-8": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Where are you based?",
-            "answer": "A Hayley Original is an Australian brand. Orders are fulfilled globally by Printful from the facility closest to you."
-          }
-        },
-        "review-1": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "review_text": "Wore 'That Girl' out for the first time and got stopped three times. The quality is incredible.",
-            "author": "Sarah M.",
-            "product_name": "That Girl — Pop Art Edition"
-          }
-        },
-        "review-2": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "review_text": "'No Grey Areas' is the most me shirt I've ever owned. Wearing it felt like finally saying something out loud.",
-            "author": "Jade K.",
-            "product_name": "There Are No Grey Areas"
-          }
-        },
-        "review-3": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "review_text": "The heavyweight fabric is actually heavyweight. Washed it four times and it's still perfect.",
-            "author": "Priya T.",
-            "product_name": "Deleted"
-          }
-        },
-        "review-4": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "review_text": "Fast shipping, beautiful packaging. The note inside made it feel personal.",
-            "author": "Chloe R.",
-            "product_name": "I Didn't Come Here For This"
-          }
-        }
-      },
-      "block_order": [
-        "faq-1", "faq-2", "faq-3", "faq-4",
-        "faq-5", "faq-6", "faq-7", "faq-8",
-        "review-1", "review-2", "review-3", "review-4"
+  "name": "Info Tabs",
+  "settings": [
+    { "type": "header", "content": "Shipping" },
+    { "type": "text", "id": "shipping_title_1", "label": "Shipping 1 title", "default": "Standard Shipping" },
+    { "type": "textarea", "id": "shipping_text_1", "label": "Shipping 1 text", "default": "5-10 business days. Orders printed within 3-5 days." },
+    { "type": "text", "id": "shipping_title_2", "label": "Shipping 2 title", "default": "Express Shipping" },
+    { "type": "textarea", "id": "shipping_text_2", "label": "Shipping 2 text", "default": "2-4 business days. Available at checkout." },
+    { "type": "text", "id": "shipping_title_3", "label": "Shipping 3 title", "default": "Worldwide" },
+    { "type": "textarea", "id": "shipping_text_3", "label": "Shipping 3 text", "default": "We ship everywhere. Customs and duties may apply." },
+    { "type": "text", "id": "returns_title", "label": "Returns title", "default": "Returns and Reprints" },
+    { "type": "textarea", "id": "returns_text", "label": "Returns text", "default": "Print defects or wrong size? Contact us within 14 days." },
+    { "type": "header", "content": "Size Guide" },
+    { "type": "textarea", "id": "sizing_intro", "label": "Sizing intro", "default": "All measurements in centimetres. When in doubt, size up." },
+    { "type": "textarea", "id": "sizing_note", "label": "Sizing note", "default": "Still unsure? Email us and we will help you find your size." }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
       ]
     },
-    "contact": {
-      "type": "contact",
-      "settings": {
-        "title": "Get In Touch",
-        "intro": "Questions, custom orders, press or just to say something. Send it through.",
-        "email": "designer@ahayleyoriginal.com",
-        "instagram": "ahayleyoriginal",
-        "tiktok": "ahayleyoriginal",
-        "response_time": "We typically respond within 24–48 hours. For urgent order issues, mention your order number.",
-        "newsletter_copy": "New drops, restocks and the occasional thing worth saying.",
-        "newsletter_note": "No spam. Drop whenever."
-      }
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "label": "Stars", "default": 5 },
+        { "type": "textarea", "id": "review_text", "label": "Review text" },
+        { "type": "text", "id": "author", "label": "Author" },
+        { "type": "text", "id": "product_name", "label": "Product name" }
+      ]
     }
-  },
-  "order": [
-    "hero",
-    "announcement-bar",
-    "about",
-    "featured-products",
-    "info-tabs",
-    "contact"
-  ]
+  ],
+  "presets": [{ "name": "Info Tabs" }]
 }
+{% endschema %}
