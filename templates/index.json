@@ -36,6 +36,13 @@
         "text_2": "No grey areas. Just real words from a real life."
       }
     },
+    "section_divider_RDrcAa": {
+      "type": "section-divider",
+      "name": "Section Divider",
+      "settings": {
+        "text": "SHOP THE COLLECTION"
+      }
+    },
     "featured-products": {
       "type": "featured-products",
       "settings": {
@@ -72,13 +79,6 @@
         "response_time": "We typically respond within 24–48 hours. For urgent order issues, mention your order number.",
         "newsletter_copy": "New drops, restocks and the occasional thing worth saying.",
         "newsletter_note": "No spam. Drop whenever."
-      }
-    },
-    "section_divider_RDrcAa": {
-      "type": "section-divider",
-      "name": "Section Divider",
-      "settings": {
-        "text": "SHOP THE COLLECTION"
       }
     }
   },
