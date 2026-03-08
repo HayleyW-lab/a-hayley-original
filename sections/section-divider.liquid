@@ -1,0 +1,55 @@
+<div class="section-divider">
+  <div class="section-divider__inner">
+    <span class="section-divider__text">{{ section.settings.text | default: 'SHOP THE COLLECTION' }}</span>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-divider {
+    background: #fff;
+    color: #000;
+    padding: 28px 40px;
+    width: 100%;
+  }
+
+  .section-divider__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section-divider__text {
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    font-weight: 800;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .section-divider {
+      padding: 22px 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Section Divider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Divider text",
+      "default": "SHOP THE COLLECTION"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Divider"
+    }
+  ]
+}
+{% endschema %}
