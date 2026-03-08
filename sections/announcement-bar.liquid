@@ -1,0 +1,83 @@
+<div class="ticker-bar">
+  <div class="ticker-bar__inner">
+    {% assign items = section.settings.ticker_text | split: '|' %}
+    {% for i in (1..2) %}
+      {% for item in items %}
+        <span class="ticker-bar__item">{{ item | strip }}</span>
+        <span class="ticker-bar__divider">✦</span>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .ticker-bar {
+    background: #ffffff;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 18px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .ticker-bar__inner {
+    display: inline-flex;
+    align-items: center;
+    animation: ticker-scroll var(--ticker-speed, 20s) linear infinite;
+  }
+
+  .ticker-bar__inner:hover {
+    animation-play-state: paused;
+  }
+
+  .ticker-bar__item {
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #000000;
+    padding: 0 32px;
+    white-space: nowrap;
+  }
+
+  .ticker-bar__divider {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+  }
+
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "ticker_text",
+      "label": "Ticker items (separate with |)",
+      "default": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This"
+    },
+    {
+      "type": "select",
+      "id": "speed",
+      "label": "Scroll speed",
+      "options": [
+        { "value": "15s", "label": "Fast" },
+        { "value": "22s", "label": "Medium" },
+        { "value": "30s", "label": "Slow" }
+      ],
+      "default": "22s"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}
