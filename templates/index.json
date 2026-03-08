@@ -170,8 +170,8 @@
     }
   },
   "order": [
-    "announcement-bar",
     "hero",
+    "announcement-bar",
     "about",
     "featured-products",
     "info-tabs",
