@@ -42,21 +42,7 @@
       </div>
     </div>
 
-    <!-- Nav col -->
-    <div class="footer__col">
-      <h4 class="footer__col-heading">Shop</h4>
-      {% for link in section.settings.menu.links %}
-        <a href="{{ link.url }}" class="footer__col-link">{{ link.title }}</a>
-      {% endfor %}
-    </div>
 
-    <!-- Help col -->
-    <div class="footer__col">
-      <h4 class="footer__col-heading">Help</h4>
-      {% for link in section.settings.help_menu.links %}
-        <a href="{{ link.url }}" class="footer__col-link">{{ link.title }}</a>
-      {% endfor %}
-    </div>
 
   </div>
 
@@ -74,9 +60,7 @@
       {% endif %}
     </div>
 
-    <p class="footer__made">
-      Made in Australia &nbsp;·&nbsp; Fulfilled by Printful
-    </p>
+
   </div>
 
 </footer>
@@ -92,7 +76,7 @@
   /* ── Top grid ── */
   .footer__top {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto 60px;
@@ -184,13 +168,14 @@
   .footer__bottom {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 16px;
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 32px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
   }
 
   .footer__copyright,
