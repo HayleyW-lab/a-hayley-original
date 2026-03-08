@@ -1,0 +1,447 @@
+<section class="contact">
+  <div class="contact__inner">
+
+    <div class="contact__header">
+      <h2 class="contact__title">{{ section.settings.title | default: 'Get In Touch' }}</h2>
+      <p class="contact__intro">{{ section.settings.intro | default: 'Questions, custom orders, press or just to say something. Send it through.' }}</p>
+    </div>
+
+    <div class="contact__grid">
+
+      <!-- Contact form -->
+      <div class="contact__form-wrap">
+        {%- form 'contact', id: 'ContactForm' -%}
+
+          {% if form.posted_successfully? %}
+            <div class="contact__success">
+              ✓ Message sent — we'll be in touch soon.
+            </div>
+          {% endif %}
+
+          {% if form.errors %}
+            <div class="contact__error">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <div class="contact__field">
+            <label class="contact__label" for="ContactForm-name">Name</label>
+            <input
+              class="contact__input"
+              type="text"
+              id="ContactForm-name"
+              name="contact[name]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              autocomplete="name"
+              placeholder="Your name"
+            >
+          </div>
+
+          <div class="contact__field">
+            <label class="contact__label" for="ContactForm-email">Email <span class="contact__required">*</span></label>
+            <input
+              class="contact__input"
+              type="email"
+              id="ContactForm-email"
+              name="contact[email]"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off"
+              placeholder="your@email.com"
+              required
+            >
+          </div>
+
+          <div class="contact__field">
+            <label class="contact__label" for="ContactForm-message">Message <span class="contact__required">*</span></label>
+            <textarea
+              class="contact__input contact__input--textarea"
+              id="ContactForm-message"
+              name="contact[body]"
+              rows="5"
+              placeholder="What's on your mind..."
+              required
+            >
+              {{- form.body -}}
+            </textarea>
+          </div>
+
+          <button type="submit" class="contact__btn">Send Message</button>
+
+        {%- endform -%}
+      </div>
+
+      <!-- Contact details -->
+      <div class="contact__details">
+
+        <div class="contact__detail-item">
+          <span class="contact__detail-label">Email</span>
+          <a href="mailto:{{ section.settings.email | default: 'designer@ahayleyoriginal.com' }}" class="contact__detail-link">
+            {{ section.settings.email | default: 'designer@ahayleyoriginal.com' }}
+          </a>
+        </div>
+
+        <div class="contact__detail-item">
+          <span class="contact__detail-label">Instagram</span>
+          <a href="https://www.instagram.com/{{ section.settings.instagram | default: 'ahayleyoriginal' }}" class="contact__detail-link" target="_blank" rel="noopener">
+            @{{ section.settings.instagram | default: 'ahayleyoriginal' }}
+          </a>
+        </div>
+
+        <div class="contact__detail-item">
+          <span class="contact__detail-label">TikTok</span>
+          <a href="https://www.tiktok.com/@{{ section.settings.tiktok | default: 'ahayleyoriginal' }}" class="contact__detail-link" target="_blank" rel="noopener">
+            @{{ section.settings.tiktok | default: 'ahayleyoriginal' }}
+          </a>
+        </div>
+
+        {% if section.settings.response_time != blank %}
+          <div class="contact__response">
+            <span class="contact__detail-label">Response time</span>
+            <p>{{ section.settings.response_time }}</p>
+          </div>
+        {% endif %}
+
+        <!-- Newsletter signup -->
+        <div class="contact__newsletter">
+          <span class="contact__detail-label">Newsletter</span>
+          <p class="contact__newsletter-copy">{{ section.settings.newsletter_copy | default: 'New drops, restocks and the occasional thing worth saying.' }}</p>
+          {%- form 'customer', id: 'NewsletterForm' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            {% if form.posted_successfully? %}
+              <p class="contact__newsletter-success">✓ You're in. Welcome to the original.</p>
+            {% else %}
+              <div class="contact__newsletter-form">
+                <input
+                  class="contact__input contact__input--newsletter"
+                  type="email"
+                  name="contact[email]"
+                  placeholder="your@email.com"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  required
+                >
+                <button type="submit" class="contact__newsletter-btn">Join</button>
+              </div>
+              <p class="contact__newsletter-note">{{ section.settings.newsletter_note | default: 'No spam. Drop whenever.' }}</p>
+            {% endif %}
+          {%- endform -%}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .contact {
+    background: #000;
+    color: #fff;
+    padding: 100px 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .contact__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact__header {
+    margin-bottom: 60px;
+  }
+
+  .contact__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .contact__intro {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 480px;
+    letter-spacing: 0.02em;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  /* ── Form ── */
+  .contact__field {
+    margin-bottom: 20px;
+  }
+
+  .contact__label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+
+  .contact__required {
+    color: rgba(255,255,255,0.25);
+  }
+
+  .contact__input {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.25s;
+    -webkit-appearance: none;
+  }
+
+  .contact__input::placeholder {
+    color: rgba(255,255,255,0.2);
+  }
+
+  .contact__input:focus {
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  .contact__input--textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+  }
+
+  .contact__btn {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 14px 40px;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+    margin-top: 8px;
+  }
+
+  .contact__btn:hover {
+    background: transparent;
+    color: #fff;
+  }
+
+  .contact__success {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+  }
+
+  .contact__error {
+    font-size: 0.85rem;
+    color: rgba(255,100,100,0.8);
+    border: 1px solid rgba(255,100,100,0.2);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+
+  /* ── Details ── */
+  .contact__detail-item {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .contact__detail-item:first-child {
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .contact__detail-label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 6px;
+  }
+
+  .contact__detail-link {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.25s;
+    letter-spacing: 0.02em;
+  }
+
+  .contact__detail-link:hover {
+    color: #fff;
+  }
+
+  .contact__response {
+    padding-top: 32px;
+  }
+
+  .contact__response p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    margin-top: 6px;
+  }
+
+  /* ── Newsletter ── */
+  .contact__newsletter {
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 24px;
+  }
+
+  .contact__newsletter-copy {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    margin: 8px 0 16px;
+  }
+
+  .contact__newsletter-form {
+    display: flex;
+    gap: 2px;
+  }
+
+  .contact__input--newsletter {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+  }
+
+  .contact__newsletter-btn {
+    background: #fff;
+    color: #000;
+    font-family: inherit;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.25s, color 0.25s;
+    flex-shrink: 0;
+  }
+
+  .contact__newsletter-btn:hover {
+    background: transparent;
+    color: #fff;
+  }
+
+  .contact__newsletter-note {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.25);
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .contact__newsletter-success {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 14px 18px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .contact {
+      padding: 72px 20px;
+    }
+
+    .contact__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .contact__details {
+      order: -1;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Get In Touch"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "Questions, custom orders, press or just to say something. Send it through."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact email",
+      "default": "designer@ahayleyoriginal.com"
+    },
+    {
+      "type": "text",
+      "id": "instagram",
+      "label": "Instagram handle (without @)",
+      "default": "ahayleyoriginal"
+    },
+    {
+      "type": "text",
+      "id": "tiktok",
+      "label": "TikTok handle (without @)",
+      "default": "ahayleyoriginal"
+    },
+    {
+      "type": "textarea",
+      "id": "response_time",
+      "label": "Response time note",
+      "default": "We typically respond within 24–48 hours. For urgent order issues, mention your order number."
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_copy",
+      "label": "Newsletter description",
+      "default": "New drops, restocks and the occasional thing worth saying."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_note",
+      "label": "Fine print",
+      "default": "No spam. Drop whenever."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact"
+    }
+  ]
+}
+{% endschema %}
