@@ -11,6 +11,13 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
+        "speed": "22s"
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -20,7 +27,5 @@
       }
     }
   },
-  "order": [
-    "header"
-  ]
+  "order": ["announcement-bar", "header"]
 }
