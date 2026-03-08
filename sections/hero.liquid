@@ -1,49 +1,93 @@
 <section class="hero">
   <div class="hero__content">
-    <h1 class="hero__title">A Hayley Original</h1>
-    <p class="hero__tagline">Every saying has a story</p>
-    <a href="/collections/all" class="hero__btn">Shop Now</a>
+    <h1 class="hero__title">{{ section.settings.title | default: shop.name }}</h1>
+    <p class="hero__tagline">{{ section.settings.tagline | default: 'Every saying has a story' }}</p>
+    <a href="{{ section.settings.button_url | default: '/collections/all' }}" class="hero__btn">
+      {{ section.settings.button_text | default: 'Shop Now' }}
+    </a>
   </div>
 </section>
 
-<style>
+{% stylesheet %}
   .hero {
     background-color: #000000;
     color: #ffffff;
     text-align: center;
     padding: 120px 20px;
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .hero__title {
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 0.1em;
     margin-bottom: 20px;
+    line-height: 1;
   }
 
   .hero__tagline {
-    font-size: 1.5rem;
-    font-style: italic;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 48px;
   }
 
   .hero__btn {
+    display: inline-block;
     background-color: #ffffff;
     color: #000000;
-    padding: 15px 40px;
-    font-size: 1rem;
-    font-weight: 900;
+    padding: 14px 44px;
+    font-size: 0.7rem;
+    font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
-    letter-spacing: 2px;
+    letter-spacing: 0.2em;
     border: 2px solid #ffffff;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   .hero__btn:hover {
     background-color: #000000;
     color: #ffffff;
   }
-</style>
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "A Hayley Original"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Every saying has a story"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}
