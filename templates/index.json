@@ -57,6 +57,22 @@
         "newsletter_copy": "New drops, restocks and the occasional thing worth saying.",
         "newsletter_note": "No spam. Drop whenever."
       }
+    },
+    "info_tabs_PDyyeX": {
+      "type": "info-tabs",
+      "name": "Info Tabs",
+      "settings": {
+        "shipping_title_1": "Standard Shipping",
+        "shipping_text_1": "5-10 business days. Orders printed within 3-5 days.",
+        "shipping_title_2": "Express Shipping",
+        "shipping_text_2": "2-4 business days. Available at checkout.",
+        "shipping_title_3": "Worldwide",
+        "shipping_text_3": "We ship everywhere. Customs and duties may apply.",
+        "returns_title": "Returns and Reprints",
+        "returns_text": "Print defects or wrong size? Contact us within 14 days.",
+        "sizing_intro": "All measurements in centimetres. When in doubt, size up.",
+        "sizing_note": "Still unsure? Email us and we will help you find your size."
+      }
     }
   },
   "order": [
@@ -64,6 +80,7 @@
     "announcement_bar_nkdJWt",
     "about",
     "featured-products",
+    "info_tabs_PDyyeX",
     "contact_MfPNKz"
   ]
 }
