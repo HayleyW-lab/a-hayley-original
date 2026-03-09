@@ -51,6 +51,13 @@
         "product_limit": 3
       }
     },
+    "section_divider_ppCJcN": {
+      "type": "section-divider",
+      "name": "Section Divider",
+      "settings": {
+        "text": "EVERYTHING YOU NEED TO KNOW"
+      }
+    },
     "info_tabs_PDyyeX": {
       "type": "info-tabs",
       "name": "Info Tabs",
@@ -67,6 +74,13 @@
         "sizing_note": "Still unsure? Email us and we will help you find your size."
       }
     },
+    "section_divider_wMmjfi": {
+      "type": "section-divider",
+      "name": "Section Divider",
+      "settings": {
+        "text": "WE'RE HERE"
+      }
+    },
     "contact_MfPNKz": {
       "type": "contact",
       "name": "Contact",
@@ -80,15 +94,35 @@
         "newsletter_copy": "New drops, restocks and the occasional thing worth saying.",
         "newsletter_note": "No spam. Drop whenever."
       }
+    },
+    "announcement_bar_hVrjb4": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
+        "speed": "22s"
+      }
+    },
+    "announcement_bar_t4MfdE": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
+        "speed": "22s"
+      }
     }
   },
   "order": [
+    "announcement_bar_t4MfdE",
     "hero",
     "announcement_bar_nkdJWt",
     "about",
     "section_divider_RDrcAa",
     "featured-products",
+    "section_divider_ppCJcN",
     "info_tabs_PDyyeX",
-    "contact_MfPNKz"
+    "section_divider_wMmjfi",
+    "contact_MfPNKz",
+    "announcement_bar_hVrjb4"
   ]
 }
