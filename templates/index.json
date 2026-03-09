@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "announcement_bar_t4MfdE": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
+        "speed": "22s"
+      }
+    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -18,12 +26,11 @@
         "button_url": ""
       }
     },
-    "announcement_bar_nkdJWt": {
-      "type": "announcement-bar",
-      "name": "Announcement Bar",
+    "section_divider_p6xbFM": {
+      "type": "section-divider",
+      "name": "Section Divider",
       "settings": {
-        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
-        "speed": "22s"
+        "text": "ABOUT"
       }
     },
     "about": {
@@ -102,20 +109,12 @@
         "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
         "speed": "22s"
       }
-    },
-    "announcement_bar_t4MfdE": {
-      "type": "announcement-bar",
-      "name": "Announcement Bar",
-      "settings": {
-        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
-        "speed": "22s"
-      }
     }
   },
   "order": [
     "announcement_bar_t4MfdE",
     "hero",
-    "announcement_bar_nkdJWt",
+    "section_divider_p6xbFM",
     "about",
     "section_divider_RDrcAa",
     "featured-products",
