@@ -15,7 +15,7 @@
       "type": "header",
       "settings": {
         "logo": "shopify://shop_images/New_H_Logo.png_fireworks_inverted.png",
-        "menu": "",
+        "menu": "main-menu",
         "customer_account_menu": "customer-account-main-menu"
       }
     }
