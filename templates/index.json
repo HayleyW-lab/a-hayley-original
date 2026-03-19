@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "announcement_bar_t4MfdE": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
+        "speed": "22s"
+      }
+    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -16,14 +24,6 @@
         "tagline": "Every saying has a story",
         "button_text": "Shop Now",
         "button_url": ""
-      }
-    },
-    "announcement_bar_nkdJWt": {
-      "type": "announcement-bar",
-      "name": "Announcement Bar",
-      "settings": {
-        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
-        "speed": "22s"
       }
     },
     "about": {
@@ -36,6 +36,13 @@
         "text_2": "No grey areas. Just real words from a real life."
       }
     },
+    "section_divider_RDrcAa": {
+      "type": "section-divider",
+      "name": "Section Divider",
+      "settings": {
+        "text": "SHOP THE COLLECTION"
+      }
+    },
     "featured-products": {
       "type": "featured-products",
       "settings": {
@@ -44,18 +51,11 @@
         "product_limit": 3
       }
     },
-    "contact_MfPNKz": {
-      "type": "contact",
-      "name": "Contact",
+    "section_divider_ppCJcN": {
+      "type": "section-divider",
+      "name": "Section Divider",
       "settings": {
-        "title": "Get In Touch",
-        "intro": "Questions, custom orders, press or just to say something. Send it through.",
-        "email": "designer@ahayleyoriginal.com",
-        "instagram": "ahayleyoriginal",
-        "tiktok": "ahayleyoriginal",
-        "response_time": "We typically respond within 24–48 hours. For urgent order issues, mention your order number.",
-        "newsletter_copy": "New drops, restocks and the occasional thing worth saying.",
-        "newsletter_note": "No spam. Drop whenever."
+        "text": "EVERYTHING YOU NEED TO KNOW"
       }
     },
     "info_tabs_PDyyeX": {
@@ -73,14 +73,47 @@
         "sizing_intro": "All measurements in centimetres. When in doubt, size up.",
         "sizing_note": "Still unsure? Email us and we will help you find your size."
       }
+    },
+    "section_divider_wMmjfi": {
+      "type": "section-divider",
+      "name": "Section Divider",
+      "settings": {
+        "text": "WE'RE HERE"
+      }
+    },
+    "contact_MfPNKz": {
+      "type": "contact",
+      "name": "Contact",
+      "settings": {
+        "title": "Get In Touch",
+        "intro": "Questions, custom orders, press or just to say something. Send it through.",
+        "email": "designer@ahayleyoriginal.com",
+        "instagram": "ahayleyoriginal",
+        "tiktok": "ahayleyoriginal",
+        "response_time": "We typically respond within 24–48 hours. For urgent order issues, mention your order number.",
+        "newsletter_copy": "New drops, restocks and the occasional thing worth saying.",
+        "newsletter_note": "No spam. Drop whenever."
+      }
+    },
+    "announcement_bar_hVrjb4": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
+        "speed": "22s"
+      }
     }
   },
   "order": [
+    "announcement_bar_t4MfdE",
     "hero",
-    "announcement_bar_nkdJWt",
     "about",
+    "section_divider_RDrcAa",
     "featured-products",
+    "section_divider_ppCJcN",
     "info_tabs_PDyyeX",
-    "contact_MfPNKz"
+    "section_divider_wMmjfi",
+    "contact_MfPNKz",
+    "announcement_bar_hVrjb4"
   ]
 }
