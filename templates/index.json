@@ -39,9 +39,7 @@
     "section_divider_RDrcAa": {
       "type": "section-divider",
       "name": "Section Divider",
-      "settings": {
-        "text": "SHOP THE COLLECTION"
-      }
+      "settings": {}
     },
     "featured-products": {
       "type": "featured-products",
@@ -54,9 +52,7 @@
     "section_divider_ppCJcN": {
       "type": "section-divider",
       "name": "Section Divider",
-      "settings": {
-        "text": "EVERYTHING YOU NEED TO KNOW"
-      }
+      "settings": {}
     },
     "info_tabs_PDyyeX": {
       "type": "info-tabs",
@@ -77,9 +73,7 @@
     "section_divider_wMmjfi": {
       "type": "section-divider",
       "name": "Section Divider",
-      "settings": {
-        "text": "WE'RE HERE"
-      }
+      "settings": {}
     },
     "contact_MfPNKz": {
       "type": "contact",
@@ -94,14 +88,6 @@
         "newsletter_copy": "New drops, restocks and the occasional thing worth saying.",
         "newsletter_note": "No spam. Drop whenever."
       }
-    },
-    "announcement_bar_hVrjb4": {
-      "type": "announcement-bar",
-      "name": "Announcement Bar",
-      "settings": {
-        "ticker_text": "A Hayley Original | That Girl | Deleted | No Grey Areas | Choose A Side | Dead Not Dead | I Didn't Come Here For This",
-        "speed": "22s"
-      }
     }
   },
   "order": [
@@ -113,7 +99,6 @@
     "section_divider_ppCJcN",
     "info_tabs_PDyyeX",
     "section_divider_wMmjfi",
-    "contact_MfPNKz",
-    "announcement_bar_hVrjb4"
+    "contact_MfPNKz"
   ]
 }
