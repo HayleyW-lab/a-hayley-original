@@ -1,6 +1,8 @@
 <div class="section-divider">
   <div class="section-divider__inner">
-    <span class="section-divider__text">{{ section.settings.text | default: 'SHOP THE COLLECTION' }}</span>
+    {% if section.settings.text != blank %}
+      <span class="section-divider__text">{{ section.settings.text }}</span>
+    {% endif %}
     <div class="section-divider__line"></div>
   </div>
 </div>
