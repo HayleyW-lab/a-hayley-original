@@ -40,9 +40,60 @@
         <span class="header__cart-count">{{ cart.item_count }}</span>
       {% endif %}
     </a>
+
+    <button class="header__hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="header__hamburger-line"></span>
+      <span class="header__hamburger-line"></span>
+      <span class="header__hamburger-line"></span>
+    </button>
   </div>
 
 </header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu__overlay"></div>
+  <div class="mobile-menu__drawer">
+    <button class="mobile-menu__close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <nav class="mobile-menu__nav">
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}" class="mobile-menu__link">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var hamburger = document.querySelector('.header__hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    var closeBtn = document.querySelector('.mobile-menu__close');
+    var overlay = document.querySelector('.mobile-menu__overlay');
+
+    function openMenu() {
+      mobileMenu.classList.add('mobile-menu--open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('mobile-menu--open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    document.querySelectorAll('.mobile-menu__link').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+  })();
+</script>
 
 {% stylesheet %}
   .site-header {
@@ -181,6 +232,123 @@
     .header__menu {
       display: none;
     }
+  }
+
+  /* ── Hamburger button ── */
+  .header__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .header__hamburger-line {
+    display: block;
+    width: 14px;
+    height: 1.5px;
+    background: #f5f5f0;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .header__hamburger {
+      display: flex;
+    }
+  }
+
+  /* ── Mobile drawer ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+  }
+
+  .mobile-menu--open {
+    display: block;
+  }
+
+  .mobile-menu__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu--open .mobile-menu__overlay {
+    opacity: 1;
+  }
+
+  .mobile-menu__drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: #000;
+    border-left: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem 2rem;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-menu--open .mobile-menu__drawer {
+    transform: translateX(0);
+  }
+
+  .mobile-menu__close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    padding: 0;
+    align-self: flex-end;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s;
+  }
+
+  .mobile-menu__close:hover {
+    color: #fff;
+  }
+
+  .mobile-menu__close svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .mobile-menu__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mobile-menu__link {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.2s;
+  }
+
+  .mobile-menu__link:hover {
+    color: #fff;
   }
 {% endstylesheet %}
 
