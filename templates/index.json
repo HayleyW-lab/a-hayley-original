@@ -41,6 +41,7 @@
       "name": "Section Divider",
       "settings": {}
     },
+
     "featured-products": {
       "type": "featured-products",
       "settings": {
