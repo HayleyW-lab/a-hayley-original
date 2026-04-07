@@ -17,12 +17,13 @@ Developed using Shopify's theme architecture with Liquid, JavaScript, and CSS.
 
 ## Theme Architecture
 
-.
-├── assets        # CSS, JS, images and fonts
-├── layout        # Top-level page wrappers
-├── locales       # Translation files
-├── sections      # Modular full-width page components
-└── snippets      # Reusable Liquid code fragments
+| Folder | Purpose |
+|--------|---------|
+| `assets` | CSS, JS, images and fonts |
+| `layout` | Top-level page wrappers |
+| `locales` | Translation files |
+| `sections` | Modular full-width page components |
+| `snippets` | Reusable Liquid code fragments |
 
 ---
 
